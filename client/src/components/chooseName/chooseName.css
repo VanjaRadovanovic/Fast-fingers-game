@@ -1,0 +1,24 @@
+.choose-room-container > h1{
+    margin: 0;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    margin-bottom: 20px;
+}
+
+.choose-room-container > form{
+    display: flex;
+    align-items: center;
+}
+
+.choose-room-container > form > input{
+    width: 100%;
+    border: 1px solid #808080;
+    margin-right: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #FCF3D7;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 20px;
+}

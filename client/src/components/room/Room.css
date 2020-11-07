@@ -1,0 +1,7 @@
+.room-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 40% repeat(2, 1fr) auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}

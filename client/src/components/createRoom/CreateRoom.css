@@ -1,0 +1,75 @@
+.create-room-buttons {
+   padding: 10px !important;
+   width: 25px;
+   height: 40px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.create-room-form {
+   display: grid;
+   grid-template-columns: 200px auto;
+   align-items: center;
+   grid-row-gap: 20px;
+}
+
+.create-room-form > button {
+   grid-column: 1/3;
+   font-size: 20px;
+}
+
+.create-room-form > input {
+   border: 1px solid #808080;
+   background-color: #fcf3d7;
+   border-radius: 10px;
+   padding: 10px;
+   font-size: 15px;
+}
+
+.create-room-form > div {
+   display: flex;
+   align-items: center;
+}
+
+.create-room-form > div > div {
+   height: 38px;
+   width: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #fcf3d7;
+   border-top: 1px solid #808080;
+   border-bottom: 1px solid #808080;
+}
+
+.left-button {
+   border-top-right-radius: 0;
+   border-bottom-right-radius: 0;
+}
+
+.right-button {
+   border-top-left-radius: 0;
+   border-bottom-left-radius: 0;
+}
+
+.create-room-title {
+   margin: 0;
+}
+
+.create-room-heading {
+   display: flex;
+   align-items: center;
+   padding-bottom: 10px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+   margin-bottom: 20px;
+}
+
+.create-room-heading > a {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 10px 10px;
+   height: 100%;
+   margin-right: 10px;
+}

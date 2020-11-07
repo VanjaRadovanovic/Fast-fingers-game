@@ -1,0 +1,17 @@
+.scoreboard-container {
+    grid-template-columns: 40% repeat(3, 1fr);
+}
+
+.scoreboard-container h4,
+.scoreboard-container h1 {
+    text-align: center;
+    margin: 0;
+}
+
+.scoreboard-container .player-name {
+    grid-column: 1 !important;
+}
+
+.game-room-heading > h3 {
+    margin-right: 10px;
+}

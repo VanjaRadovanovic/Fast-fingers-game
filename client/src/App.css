@@ -1,0 +1,20 @@
+html{
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.outher-container{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.game-selection-container{
+  width: 800px;
+  max-width: 90vw;
+  background-color: #FFF0C4;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1)
+}
