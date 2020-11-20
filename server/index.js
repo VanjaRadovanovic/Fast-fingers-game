@@ -87,7 +87,7 @@ io.on('connect', (socket) => {
                             ...val,
                             progress: 0,
                             totalPoints: val.totalPoints || 0,
-                            totalPlace: val.totalPlace || 1,
+                            totalPlace: val.totalPlace,
                             currentGamePlace: 0,
                             totalAvgWPM: val.totalAvgWPM || 0,
                             wpm: 0,
@@ -137,20 +137,23 @@ io.on('connect', (socket) => {
                 playerData.player.totalPlace = totalPlaceCount(val.players, playerData.player);
                 console.log(playerData.player, 'total place count');
                 io.to(playerData.room).emit('player-finished', playerData.player);
-                let newPlayersData = val.players.map((player, i, arr) => {
+                let newPlayersData = val.players.map((player) => {
                     if (player.id === playerData.player.id) {
                         return playerData.player;
                     }
+                    return player;
+                });
+                newPlayersData = newPlayersData.map((player, i, arr) => {
                     if (arr.length === val.nextPlace + 1 && player.progress !== 100) {
                         return {
                             ...player,
                             currentGamePlace: arr.length,
                             totalAvgWPM: Math.round((player.totalAvgWPM + player.wpm) / 2),
-                            totalPlace: totalPlaceCount(val.players, playerData.player),
+                            totalPlace: totalPlaceCount(arr, player)
                         };
                     }
                     return player;
-                });
+                })
                 if (val.players.length === val.nextPlace + 1 || val.players.length === val.nextPlace) {
                     io.to(playerData.room).emit('game-finished', { ...val, players: newPlayersData });
                 }
@@ -166,7 +169,9 @@ io.on('connect', (socket) => {
             if (val.id !== thisPlayer.id && val.totalPoints > thisPlayer.totalPoints) {
                 totalPlace++;
             }
+            console.log(thisPlayer,'cal place', totalPlace);
         });
+        console.log('returning total place', totalPlace)
         return totalPlace;
     };
 
