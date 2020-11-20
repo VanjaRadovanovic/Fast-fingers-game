@@ -187,7 +187,8 @@ const GameRoom = ({ socket, playerProgressData, playerFinishedData, gameFinished
         setInput('');
         if (gameData.text.length === wordCounter + 1) {
             secondsTimerOptions.pause();
-            socket.emit('finished', { room: gameData.id, player: { ...gameData.players.filter((val) => val.id === socket.id)[0], wpm: calcWPM() } });
+            console.log('wpm count', Math.round((letterCounter.total / 5) * (60 / ((5 - (timer.minutes + 1)) * 60 + (60 - secondsTimer / 1000)))))
+            socket.emit('finished', { room: gameData.id, player: { ...gameData.players.filter((val) => val.id === socket.id)[0], wpm: Math.round((letterCounter.total / 5) * (60 / ((5 - (timer.minutes + 1)) * 60 + (60 - secondsTimer / 1000)))) } });
         }
     };
 
