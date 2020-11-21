@@ -51,10 +51,9 @@ const GameRoom = ({ socket, playerProgressData, playerFinishedData, gameFinished
             if (secondsTimer === 0) {
                 setTimeout(() => {
                     secondsTimerOptions.reset();
-                    if (textBlur === 'text-blur') {
-                        secondsTimerOptions.start();
-                    }
+                    secondsTimerOptions.start();         
                 }, 1000);
+                console.log('new timer for minutes', timer.minutes)
                 newTimerSettings = { minutes: timer.minutes - 1, display: `${timer.minutes}:0${secondsTimer.toString().slice(0, 2)}` };
             } else if (secondsTimer < 10000) {
                 newTimerSettings = { ...timer, display: `${timer.minutes}:0${secondsTimer.toString()[0]}` };
@@ -64,6 +63,7 @@ const GameRoom = ({ socket, playerProgressData, playerFinishedData, gameFinished
             if (newTimerSettings.minutes === 0 && secondsTimer === 0) {
                 gameOver();
             }
+            console.log(newTimerSettings, 'new timer settings')
             setTimer(newTimerSettings);
             let playerData = {
                 data: {
