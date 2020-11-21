@@ -2,6 +2,7 @@ const { text } = require('express');
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const path = require('path');
 
 const port = process.env.PORT || 4001;
 
@@ -217,5 +218,11 @@ io.on('connect', (socket) => {
         });
     });
 });
+
+app.use(express.static(path.join(__dirname, '/../client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.parse(__dirname, '../', '/client', '/build'));
+})
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
