@@ -7,8 +7,12 @@
 }
 
 .choose-room-container > form{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .choose-room-container > form > input{

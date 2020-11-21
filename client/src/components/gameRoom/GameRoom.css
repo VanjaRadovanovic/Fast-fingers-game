@@ -1,7 +1,13 @@
 .game-room-heading {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     padding-bottom: 5px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
@@ -12,12 +18,18 @@
 }
 
 .player-container {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 70% 10px 1fr 10px 1fr;
     grid-template-columns: 70% repeat(2, 1fr);
     grid-row-gap: 10px;
     grid-column-gap: 10px;
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
@@ -30,6 +42,8 @@
 }
 
 .player-name {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
     grid-column: 1/4;
 }
 
@@ -42,6 +56,8 @@
 .player-progress > div {
     background-color: greenyellow;
     height: 21px;
+    -webkit-transition: 200ms;
+    -o-transition: 200ms;
     transition: 200ms;
     /* transform: translateX(-100%); */
 }
@@ -56,8 +72,11 @@
 
 .game-text {
     height: 90px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     width: 100%;
     margin: 20px 0 10px 0;
     overflow: hidden;

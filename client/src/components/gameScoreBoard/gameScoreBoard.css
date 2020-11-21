@@ -1,4 +1,5 @@
 .scoreboard-container {
+    -ms-grid-columns: 40% (1fr)[3];
     grid-template-columns: 40% repeat(3, 1fr);
 }
 
@@ -9,6 +10,7 @@
 }
 
 .scoreboard-container .player-name {
+    -ms-grid-column: 1 !important;
     grid-column: 1 !important;
 }
 
