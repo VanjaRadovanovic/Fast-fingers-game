@@ -14,7 +14,6 @@ const textGen = require('txtgen');
 let rooms = [];
 
 io.on('connect', (socket) => {
-    console.log('Player has connected');
     socket.emit('rooms-data', rooms);
 
     socket.on('game-create', (data) => {
@@ -149,10 +148,8 @@ io.on('connect', (socket) => {
                 } else {
                     playerData.player.totalAvgWPM = Math.round((playerData.player.totalAvgWPM + playerData.player.wpm) / 2);
                 }
-                console.log(playerData.player.totalPoints);
                 playerData.player.totalPoints += val.players.length - playerData.player.currentGamePlace;
                 playerData.player.totalPlace = totalPlaceCount(val.players, playerData.player);
-                console.log(playerData.player, 'total place count');
                 io.to(playerData.room).emit('player-finished', playerData.player);
                 let newPlayersData = val.players.map((player) => {
                     if (player.id === playerData.player.id) {
@@ -186,9 +183,7 @@ io.on('connect', (socket) => {
             if (val.id !== thisPlayer.id && val.totalPoints > thisPlayer.totalPoints) {
                 totalPlace++;
             }
-            console.log(thisPlayer,'cal place', totalPlace);
         });
-        console.log('returning total place', totalPlace)
         return totalPlace;
     };
 
@@ -222,7 +217,7 @@ io.on('connect', (socket) => {
 app.use(express.static(path.join(__dirname, '/../client/build')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.parse(__dirname, '../', '/client', '/build'));
+    res.sendFile(path.resolve(__dirname, './../', './client', './build', 'index.html'));
 })
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

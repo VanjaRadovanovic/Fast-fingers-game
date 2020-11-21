@@ -53,7 +53,6 @@ const GameRoom = ({ socket, playerProgressData, playerFinishedData, gameFinished
                     secondsTimerOptions.reset();
                     secondsTimerOptions.start();         
                 }, 1000);
-                console.log('new timer for minutes', timer.minutes)
                 newTimerSettings = { minutes: timer.minutes - 1, display: `${timer.minutes}:0${secondsTimer.toString().slice(0, 2)}` };
             } else if (secondsTimer < 10000) {
                 newTimerSettings = { ...timer, display: `${timer.minutes}:0${secondsTimer.toString()[0]}` };
@@ -63,7 +62,6 @@ const GameRoom = ({ socket, playerProgressData, playerFinishedData, gameFinished
             if (newTimerSettings.minutes === 0 && secondsTimer === 0) {
                 gameOver();
             }
-            console.log(newTimerSettings, 'new timer settings')
             setTimer(newTimerSettings);
             let playerData = {
                 data: {
@@ -187,7 +185,6 @@ const GameRoom = ({ socket, playerProgressData, playerFinishedData, gameFinished
         setInput('');
         if (gameData.text.length === wordCounter + 1) {
             secondsTimerOptions.pause();
-            console.log('wpm count', Math.round((letterCounter.total / 5) * (60 / ((5 - (timer.minutes + 1)) * 60 + (60 - secondsTimer / 1000)))))
             socket.emit('finished', { room: gameData.id, player: { ...gameData.players.filter((val) => val.id === socket.id)[0], wpm: Math.round((letterCounter.total / 5) * (60 / ((5 - (timer.minutes + 1)) * 60 + (60 - secondsTimer / 1000)))) } });
         }
     };

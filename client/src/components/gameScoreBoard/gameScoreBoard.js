@@ -9,12 +9,10 @@ const GameScoreBoard = ({ socket, gameFinishedData, setGameFinishedData }) => {
             setGameData(gameFinishedData.data);
             setGameFinishedData({ finished: false, data: { players: [] } });
         }
-        console.log(gameFinishedData.data);
     }, [gameFinishedData]);
 
     useEffect(() => {
         if (gameData.maxPlayers && gameData.numOfRounds !== gameData.gameCounter) {
-            console.log(gameData, 'gameData from game score board room');
             setTimeout(() => {
                 if (socket.id === gameData.host) {
                     socket.emit('start-game', gameData);
@@ -24,7 +22,6 @@ const GameScoreBoard = ({ socket, gameFinishedData, setGameFinishedData }) => {
     }, [gameData]);
 
     const startingNewGame = (e) => {
-        console.log('starting new game');
         socket.emit('start-game', gameData);
     }
 

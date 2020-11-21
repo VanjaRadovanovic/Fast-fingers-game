@@ -7,7 +7,6 @@ const JoiningRoom = ({ socket }) => {
     const history = useHistory();
 
     socket.on('game-joining-data', (data) => {
-        console.log(data, 'game joining data');
         setRoomData(data);
     });
 

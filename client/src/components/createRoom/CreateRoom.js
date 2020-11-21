@@ -21,7 +21,6 @@ const CreateRoom = ({ socket, hostName }) => {
             host: socket.id,
         };
         socket.emit('game-create', data);
-        console.log(socket.id);
         history.push(`/room/${data.id}/joining`);
     };
 

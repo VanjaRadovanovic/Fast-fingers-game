@@ -22,7 +22,6 @@ function App() {
         socket = io('http://localhost:4001', { forceNew: true });
         socket.on('rooms-data', (data) => {
             setRoomData(data);
-            console.log(data, 'new rooms data');
         });
         socket.on('new-room-created', (data) => {
             setRoomData(data);
@@ -30,10 +29,6 @@ function App() {
 
         socket.on('player-progress', (data) => {
             setPlayerProgressData(data);
-        });
-
-        socket.on('player-left-in-game', (data) => {
-            console.log('player left in the game');
         });
 
         socket.on('player-finished', (data) => {
