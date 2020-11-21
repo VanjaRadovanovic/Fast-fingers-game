@@ -3,10 +3,8 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 
-//Port from environment variable or default - 4001
 const port = process.env.PORT || 4001;
 
-//Setting up express and adding socketIo middleware
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
@@ -27,10 +25,7 @@ io.on('connect', (socket) => {
     });
 
     socket.on('room-started', (data) => {
-        io.emit(
-            'rooms-data',
-            rooms.filter((val) => val.id !== data)
-        );
+        io.emit('rooms-data', rooms.filter((val) => val.id !== data));
     });
 
     socket.on('joining-room', (data) => {
@@ -77,23 +72,44 @@ io.on('connect', (socket) => {
         io.to(data.id).emit('game-redirect');
         rooms = rooms.map((val) => {
             if (val.id === data.id) {
-                let newDataStructure = {
-                    ...data,
-                    text: textGen.paragraph().split(' '),
-                    nextPlace: 1,
-                    gameCounter: val.gameCounter + 1 || 1,
-                    players: data.players.map((val) => {
-                        return {
-                            ...val,
-                            progress: 0,
-                            totalPoints: val.totalPoints || 0,
-                            totalPlace: val.totalPlace,
-                            currentGamePlace: 0,
-                            totalAvgWPM: val.totalAvgWPM || 0,
-                            wpm: 0,
-                        };
-                    }),
-                };
+                let newDataStructure;
+                if(data.gameCounter === data.numOfRounds){
+                    newDataStructure = {
+                        ...data,
+                        text: textGen.paragraph().split(' '),
+                        nextPlace: 1,
+                        gameCounter: 1,
+                        players: data.players.map((val) => {
+                            return {
+                                ...val,
+                                progress: 0,
+                                totalPoints: 0,
+                                totalPlace: val.totalPlace,
+                                currentGamePlace: 0,
+                                totalAvgWPM: 0,
+                                wpm: 0,
+                            };
+                        }),
+                    };
+                }else{
+                    newDataStructure = {
+                        ...data,
+                        text: textGen.paragraph().split(' '),
+                        nextPlace: 1,
+                        gameCounter: val.gameCounter + 1 || 1,
+                        players: data.players.map((val) => {
+                            return {
+                                ...val,
+                                progress: 0,
+                                totalPoints: val.totalPoints || 0,
+                                totalPlace: val.totalPlace,
+                                currentGamePlace: 0,
+                                totalAvgWPM: val.totalAvgWPM || 0,
+                                wpm: 0,
+                            };
+                        }),
+                    };
+                }
                 if (newDataStructure.text.length > 2) {
                     newDataStructure.text = newDataStructure.text.filter((val, i) => i < 2);
                 }

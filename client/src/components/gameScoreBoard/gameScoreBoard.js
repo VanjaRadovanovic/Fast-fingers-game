@@ -14,7 +14,7 @@ const GameScoreBoard = ({ socket, gameFinishedData, setGameFinishedData }) => {
 
     useEffect(() => {
         if (gameData.maxPlayers && gameData.numOfRounds !== gameData.gameCounter) {
-            console.log(gameData);
+            console.log(gameData, 'gameData from game score board room');
             setTimeout(() => {
                 if (socket.id === gameData.host) {
                     socket.emit('start-game', gameData);
@@ -22,6 +22,11 @@ const GameScoreBoard = ({ socket, gameFinishedData, setGameFinishedData }) => {
             }, 7000);
         }
     }, [gameData]);
+
+    const startingNewGame = (e) => {
+        console.log('starting new game');
+        socket.emit('start-game', gameData);
+    }
 
     return (
         <div>
@@ -47,6 +52,9 @@ const GameScoreBoard = ({ socket, gameFinishedData, setGameFinishedData }) => {
                     <h1>{val.totalPlace}</h1>
                 </div>
             ))}
+            {socket.id === gameData.host && gameData.gameCounter === gameData.numOfRounds ? (
+                <button className="button-style" style={{width: '100%'}} onClick={startingNewGame}>Start game</button>
+            ) : null}
         </div>
     );
 };
